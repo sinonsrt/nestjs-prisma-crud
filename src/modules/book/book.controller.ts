@@ -1,4 +1,12 @@
-import { Body, Controller, Get, Param, Post, Put } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  Post,
+  Put,
+} from '@nestjs/common';
 import { BookService } from './book.service';
 import { BookDTO } from './DTO/book.dto';
 
@@ -22,5 +30,10 @@ export class BookController {
     @Body() { title, bar_code, description }: BookDTO,
   ) {
     return this.bookService.update({ id, title, bar_code, description });
+  }
+
+  @Delete(':id')
+  async delete(@Param('id') id: string) {
+    return this.bookService.delete(id);
   }
 }
